@@ -1,0 +1,4 @@
+(setq expand-tabs t)
+(setq indent-tabs-mode nil)
+(setq tab-width 4)
+(setq delete-active-region t)
