@@ -7,12 +7,14 @@ fi
 
 # User specific aliases and functions
 if [ -f $HOME/.bash_aliases ]; then
-    source $HOME/.bash_aliases
+    . $HOME/.bash_aliases
 fi
 
 if [ -f $HOME/.bash_functions ]; then
-    source $HOME/.bash_functions
+    . $HOME/.bash_functions
 fi
+#Environment Variables
+[[ -f ${HOME}/.bash_env ]] && . ${HOME}/.bash_env
 
 #define shortcut to $HOME/usr/bin
 if [[ -z $bin ]] && [[ -d $HOME/usr/bin ]]; then
@@ -23,9 +25,6 @@ fi
 if [[ -n $bin ]]; then
     export PATH=$PATH:$bin
 fi
-
-#to do, add ~/usr/lib(64) to ld search path
-EDITOR=zile
-
+#setup dircolors, colors are weird if I don't do this
 eval `dircolors`
 
