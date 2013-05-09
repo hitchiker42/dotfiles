@@ -1,3 +1,8 @@
+#Bash functions
+#Simple ideas for useful bash functions are any comands
+#which need given arguments inserted in weird places and such
+
+#Apply zenburn theme on a console
 zenburn(){
 if [[ $TERM = linux ]] ; then
     echo -en "\e]P01e2320" # zenburn black (normal black)
@@ -19,4 +24,12 @@ if [[ $TERM = linux ]] ; then
 else
 echo "Not running on a console"
 fi
+}
+#change 2 finger vertical scrolling, mainly for games
+vert(){
+synclient VertTwoFingerScroll="$1"
+}
+#serach current directory, why not just an alias, I don't know
+search(){
+ls | grep "$@"
 }

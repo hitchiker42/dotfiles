@@ -1,3 +1,4 @@
+;;chicken scheme startup file, for now just readline support
 (use readline irregex)
 (current-input-port (make-gnu-readline-port))
 (gnu-history-install-file-manager

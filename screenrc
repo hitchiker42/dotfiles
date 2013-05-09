@@ -1,3 +1,4 @@
+#screen config, turn off visual bell & startup screen, set prefix key to C-o
 vbell off
 escape ^oo
 starup_message off

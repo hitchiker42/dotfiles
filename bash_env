@@ -1,3 +1,4 @@
-export ATSHOME="/home/tucker/usr/lib/ats-anairiats-0.2.10"
-export ATSHOMERELOC="ATS-0.2.10"
+#Common environment variables, not a lot so far
+#export ATSHOME="/home/tucker/usr/lib/ats-anairiats-0.2.10"
+#export ATSHOMERELOC="ATS-0.2.10"
 export EDITOR=zile

@@ -1,16 +1,22 @@
+#Global git config file
+#basic settings, editor and global ignore file
 [core]
 	editor = zile
 	excludesfile = ~/.gitignore_global
+#timeout password grace period
 [credential]
 	helper = cache --timeout 3600
+#Who am I
 [user]
 	name = Tucker
 	email = Hitchiker42@gmail.com
+#Aliases
 [alias]
 	st = status
 	co = checkout
 	up = pull
 	ci = commit
 	br = branch
+#Not Sure
 [push]
 	default = simple

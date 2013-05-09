@@ -1,6 +1,6 @@
+;;Stumpwm config
 (in-package :stumpwm)
 (run-shell-command "xsetroot -cursor_name left-ptr")
-(run-shell-command "setxkbmap -option altwin:ctrl_win -option ctrl:nocaps dvorak")
 (run-shell-command "xrdb -merge ~/.Xresources")
 (define-key *root-map* (kbd "C-i") "exec conkeror")
 (define-key *root-map* (kbd "c") "exec urxvt")

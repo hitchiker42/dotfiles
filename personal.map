@@ -1,3 +1,5 @@
+#Personal console keymap file, basically dvorak with capslock as escape
+#and command/win keys and ctrl
 keymaps 0-2,4-6,8-9,12
 alt_is_meta
 include "linux-with-alt-and-altgr.inc"
