@@ -2,6 +2,8 @@
 #urxvt &
 #compiz-manager
 case "$2" in
+    i3)urxvt &
+        i3;;
     awesome)urxvt &
         awesome ;;
     xmonad)urxvt &
