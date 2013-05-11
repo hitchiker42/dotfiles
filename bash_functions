@@ -29,7 +29,23 @@ fi
 vert(){
 synclient VertTwoFingerScroll="$1"
 }
-#serach current directory, why not just an alias, I don't know
+#search current directory, why not just an alias, I don't know
 search(){
 ls | grep "$@"
+}
+#search processes
+ps-search(){
+ps -e | grep "$@"
+}
+#rename a file to its md5sum + a given extension
+md5-rename(){
+if [[ -n "$1" ]] && [[ -n "$2" ]] && [[ -f "$1" ]]; then
+ mv -f "$1" `md5sum "$1" | awk '{print $1}'`.$2 &>/dev/null
+else
+ echo -e 'usage: md5-rename filename extension\n\trename filename to `md5sum filename`.extension'
+fi
+}
+#set apple function keys, 1 for media keys, 2 for fn keys, 0 for always fn keys
+fn-keys(){
+echo "$1" | sudo tee /sys/module/hid_apple/parameters/fnmode
 }
