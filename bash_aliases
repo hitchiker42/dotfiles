@@ -48,3 +48,4 @@ alias sbcl-term='sbcl --userinit /home/tucker/.sbcl-term'
 alias jisho=tagainijisho
 alias core-temp='sensors | grep Core'
 alias wine_jp='LANG=ja_JP.UTF-8 wine'
+alias emelfm2='GTK2_RC_FILES="/home/tucker/.gtkrc-zenburn" emelfm2'
