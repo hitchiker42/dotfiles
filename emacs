@@ -22,7 +22,7 @@
 (require 'auto-complete)
 (require 'quack)
 (require 'geiser)
-(require 'w3m)
+(require 'w3m-autoloads)
 (require 'go-mode)
 (require 'shen-mode)
 (require 'magit)
@@ -31,6 +31,7 @@
 ;;startup any useful modes
 (global-rainbow-delimiters-mode)
 (global-auto-complete-mode)
+(icicles-mode)
 (windmove-default-keybindings)
 ;;; Backup files
 ;; Put them in one nice place if possible
@@ -42,6 +43,19 @@
       version-control t      ; Use version numbers on backups,
       kept-new-versions 3    ; keep some new versions
       kept-old-versions 2)   ; and some old ones
+;;set theme path based on files in elpa directory
+(require 'dash)
+(require 's)
+(-each
+   (-map
+      (lambda (item)
+      (format "~/.emacs.d/elpa/%s" item))
+   (-filter
+      (lambda (item) (s-contains? "theme" item))
+      (directory-files "~/.emacs.d/elpa/")))
+   (lambda (item)
+      (add-to-list 'custom-theme-load-path item)))
+(load-theme 'zenburn t)
 ;;Does this do anything?
 ;; (require 'compile)
 ;; (add-to-list

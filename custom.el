@@ -45,6 +45,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(icicle-candidate-part ((t (:background "dark slate blue"))))
+ '(icicle-current-candidate-highlight ((t (:background "brown4"))))
+ '(icicle-multi-command-completion ((t (:background "dim gray" :foreground "dark cyan"))))
+ '(icicle-mustmatch-completion ((t (:box (:line-width -2 :color "dark slate gray")))))
  '(whitespace-empty ((t (:background "grey30" :foreground "grey30"))))
  '(whitespace-indentation ((t (:background "dark gray" :foreground "#cc9393"))))
  '(whitespace-space ((t (:background "grey25" :foreground "grey50"))))

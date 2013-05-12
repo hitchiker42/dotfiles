@@ -1,0 +1,4 @@
+include "/home/tucker/.gtkrc-zenburn"
+gtk-icon-theme-name="Tango"
+gtk-font-name="Dejavu Sans 10"
+gtk-key-theme-name="Emacs"

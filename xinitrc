@@ -4,17 +4,28 @@
 #isn't the full pathname to a program we need to do a case statement
 #for the 2nd arguement, could add "$3" to end of the executables if we
 #need to pass arguements to anything
+xrdb merge ${HOME}/.Xresources
 case "$2" in
-    i3)i3;;
     awesome)urxvt &
         awesome ;;
-    xmonad)urxvt &
-        xmonad;;
-    stumpwm) stumpwm;;
+    dswm) dswm;;
+    dwm) urxvt &
+        dwm;;
+    e17|enlightenment) enlightenment_start;;
+    gnome) gnome-session;;
+    i3)i3;;
+    lxde) startlxde;;
+    notion) urxvt &
+        notion;;
+    qtile) urxvt &
+        qtile ;;
     sawfish)urxvt&
         sawfish;;
-    dswm) dswm;;
-    enlightenment);&
-    e17) enlightenment_start;;
-    *) stumpwm ;;
+    spectrwm) urxvt &
+        spectrwm;;
+    subtle) subtle;;
+    xfce) startxfce4;;
+    xmonad)urxvt &
+        xmonad;;
+    stumpwm|*) stumpwm ;;
 esac

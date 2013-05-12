@@ -20,6 +20,13 @@ URxvt.keysym.M-v: perl:clipboard:paste
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o -selection clipboard
 URxvt.iso14755: False 
+!Scrolling
+!Don't scroll with output(it's really annoying)
+URxvt*scrollTtyOutput: false
+!Do scroll with buffer
+URxvt*scrollWithBuffer: true
+!Return to promp on button press
+URxvt*scrollTtyKeypress: true
 !Zenburn color scheme
 URxvt*colorUL: #c5f779
 URxvt*underlineColor: #c5f779
