@@ -49,3 +49,10 @@ fi
 fn-keys(){
 echo "$1" | sudo tee /sys/module/hid_apple/parameters/fnmode
 }
+qemu(){
+  sudo qemu-system-x86_64 -enable-kvm -m 4G "$@"
+}
+background(){
+"$@" &>/dev/null &
+disown
+}

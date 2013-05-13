@@ -49,30 +49,24 @@ URxvt*color15: #ffffff
  
 !XTERM
 !Zenburn colors
-!black
-!Xterm*color0: #353535
-!Xterm*color8: #666666
-!red
-!Xterm*color1: #AE4747
-!Xterm*color9: #EE6363
-!green
-!Xterm*color2: #556B2F
-!Xterm*color10: #9ACD32
-!brown/yellow
-!Xterm*color3: #DAA520
-!Xterm*color11: #FFC125
-!blue
-!Xterm*color4: #6F99B4
-!Xterm*color12: #7C96B0
-!magenta
-!Xterm*color5: #8B7B8B
-!Xterm*color13: #D8BFD8
-!cyan
-!Xterm*color6: #A7A15E
-!Xterm*color14: #F0E68C
-!white
-!Xterm*color7: #DDDDDD
-!Xterm*color15: #FFFFFF
+xterm*background:  #3f3f3f
+xterm*foreground:  #dcdccc
+xterm*color0:      #1E2320
+xterm*color1:      #705050
+xterm*color2:      #60b48a
+xterm*color3:      #dfaf8f
+xterm*color4:      #506070
+xterm*color5:      #dc8cc3
+xterm*color6:      #8cd0d3
+xterm*color7:      #dcdccc
+xterm*color8:      #709080
+xterm*color9:      #dca3a3
+xterm*color10:     #c3bf9f
+xterm*color11:     #f0dfaf
+xterm*color12:     #94bff3
+xterm*color13:     #ec93d3
+xterm*color14:     #93e0e3
+xterm*color15:     #ffffff
 !Misc stuff
 XTerm*locale: true
 XTerm*metaSendsEscape: true
