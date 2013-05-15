@@ -33,6 +33,13 @@
 (global-auto-complete-mode)
 (icicles-mode)
 (windmove-default-keybindings)
+;;;Maxima
+;;(add-to-list 'load-path ${rootdir}/usr/share/maxima/version/emacs)
+(autoload 'maxima-mode "maxima" "Maxima mode" t)
+(autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
+(autoload 'maxima "maxima" "Maxima interaction" t)
+(autoload 'imath-mode "imath" "Imath mode for math formula input" t)
+(setq imaxima-use-maxima-mode-flag t)
 ;;; Backup files
 ;; Put them in one nice place if possible
 (if (file-directory-p "~/.backup")
