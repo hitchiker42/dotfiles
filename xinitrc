@@ -12,7 +12,7 @@ case "$2" in
     dwm) urxvt &
         dwm;;
     e17|enlightenment) enlightenment_start;;
-    gnome) gnome-session;;
+    gnome) exec gnome-session;;
     i3)i3;;
     lxde) startlxde;;
     notion) urxvt &
@@ -24,7 +24,7 @@ case "$2" in
     spectrwm) urxvt &
         spectrwm;;
     subtle) subtle;;
-    xfce) startxfce4;;
+    xfce) exec startxfce4;;
     xmonad)urxvt &
         xmonad;;
     stumpwm|*) stumpwm ;;
