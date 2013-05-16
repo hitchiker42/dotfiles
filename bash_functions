@@ -56,3 +56,7 @@ background(){
 "$@" &>/dev/null &
 disown
 }
+#not super useful as is, but has potential to be useful
+rm-if-not(){
+ls | grep "[[:print:]]*[^\"$1\"]"
+}
