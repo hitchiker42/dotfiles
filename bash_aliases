@@ -43,7 +43,6 @@ alias pacrm='sudo pacman -R'
 #less common program shortcuts/aliases
 alias ldc=ldc2
 alias sbcl=/home/tucker/usr/bin/sbcl
-alias qemu='/home/tucker/usr/bin/qemu-system-x86_64'
 alias sbcl-term='sbcl --userinit /home/tucker/.sbcl-term'
 alias jisho=tagainijisho
 alias core-temp='sensors | grep Core'
