@@ -5,6 +5,12 @@
 #for the 2nd arguement, could add "$3" to end of the executables if we
 #need to pass arguements to anything
 xrdb merge ${HOME}/.Xresources
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+	for f in /etc/X11/xinit/xinitrc.d/* ; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
+fi
 case "$2" in
     awesome)urxvt &
         awesome ;;

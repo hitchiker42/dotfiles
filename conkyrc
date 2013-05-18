@@ -63,7 +63,7 @@ double_buffer yes
 
 #MPD host/port
 #mpd_host
-mpd_port 6600
+#mpd_port 6600
 
 # Minimum size of text area
 #minimum_size 280 5
@@ -143,12 +143,14 @@ $color$stippled_hr
 ${color}Memory
 ${color0}RAM Usage:${color6} $mem/$memmax - $memperc% ${membar 5,300}
 #No swap on 13in cpu, so this needs to be a conditional
+${if_match "No swap" != "$swapperc"}
 ${color0}Swap Usage:${color6} $swap/$swapmax - $swapperc% ${swapbar 5,300}
+$endif
 ${color0}File systems:
  / $color${fs_used /}/${fs_size /} ${fs_bar 5,300 /} ${fs_type /}
 
 $color$stippled_hr
-${color}Networkinng:
+${color}Networking:
 Down:${color 366060} ${downspeed wlan0}/s${color0}\
  ${offset 70}Up:${color 94bff3} ${upspeed wlan0}/s
 ${color black}${downspeedgraph wlan0 32,150 CC9393 5C888B}\

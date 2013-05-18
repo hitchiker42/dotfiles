@@ -20,7 +20,7 @@ rsync -aAXv /* $DEST --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/medi
 FINISH=$(date +%s)
 TOTALTIME="total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds" 
 echo "$TOTALTIME"
-BACKUP=$DEST/"Backup_$(date +%m-%d-%y)"
+BACKUP=$DEST/"Backup_$(date %d-%m-%y_%s)"
 echo "Backup from $(date '+%A, %d %B %Y, %T')" > "$BACKUP"
 echo "$TOTALTIME" >>"$BACKUP"
 cat "$LOGFILE" >> "$BACKUP"
