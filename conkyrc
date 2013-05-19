@@ -88,6 +88,11 @@ border_inner_margin 4
 # border width
 border_width 1
 
+# default size for status bars
+default_bar_size 5 300
+# default size for status graphs
+default_graph_size 32 300
+
 # Default colors and also border colors
 default_color DCDCCC
 default_shade_color 3F3F3F
