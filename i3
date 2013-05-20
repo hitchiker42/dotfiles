@@ -31,9 +31,6 @@ default_orientation horizontal
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
-# kill focused window
-bindsym $mod+Shift+k kill
-
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
 
@@ -100,6 +97,9 @@ bindsym $mod+a focus parent
 
 # focus the child container
 bindsym $mod+c focus child
+
+# kill focused window
+bindsym $mod+Shift+k kill
 
 # switch to workspace
 bindsym $mod+1 workspace 1

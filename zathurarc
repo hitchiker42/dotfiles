@@ -7,7 +7,7 @@
 #     /etc/zathurarc
 #     $XDG_CONFIG_HOME/zathura/zathurarc
 
-# The zathurarc file is a simple plain text file that can be populated with various commands to change the behaviour and the look of zathura which we are going to describe in the following subsections. Each line (besides empty lines and comments (which start with a prepended #) is evaluated on its own, so it is not possible to write multiple commands in one single line.
+
 # set - Changing options
 
 # In addition to the build-in :set command zathura offers more options to be changed and makes those changes permanent. To overwrite an option you just have to add a line structured like the following
@@ -22,15 +22,6 @@
 #     BOOL - A boolean value (“true” for true, “false” for false)
 
 # In addition we advice you to check the options to get a more detailed view of the options that can be changed and which values they should be set to.
-
-# The following example should give some deeper insight of how the set command can be used
-
-# set option1 5
-# set option2 2.0
-# set option3 hello
-# set option4 hello\ world
-# set option5 "hello world"
-# set option6 "#00BB00"
 
 # map - Mapping a shortcut
 
@@ -49,19 +40,6 @@
 
 # The brackets around the value are mandatory.
 # Single key binding
-
-# The (possible) second argument defines the used key binding that should be mapped to the shortcut function and is structured like the following. On the one hand it is possible to just assign single letters, numbers or signs to it:
-
-# map a shortcut_function
-# map b shortcut_function
-# map c shortcut_function
-# map 1 shortcut_function
-# map 2 shortcut_function
-# map 3 shortcut_function
-# map ! shortcut_function
-# map ? shortcut_function
-
-# Using modifiers
 
 # It is also possible to use modifiers like the Control or Alt button on the keyboard. It is possible to use the following modifiers:
 
@@ -158,7 +136,9 @@
 # Pass arguments
 map <C-n> navigate next
 map <C-p> navigate previous
-map <C-s> search next
+map <C-f> navigate forward
+map <C-b> navigate backward
+map <C-s> search forward
 map <C-r> search backward
 map <C-y> reload
 map <C-g> goto
