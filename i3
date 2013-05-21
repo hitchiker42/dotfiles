@@ -75,8 +75,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+h split h
 
 # split in vertical orientation
-# Should switch this, I need alt-v for emacs
-bindsym $mod+v split v
+bindsym $mod+shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+u fullscreen
