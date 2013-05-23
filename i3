@@ -100,6 +100,10 @@ bindsym $mod+c focus child
 # kill focused window
 bindsym $mod+Shift+k kill
 
+# focus on a specfic program
+# [class="class"] focus
+# [title="title"] focus
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -113,16 +117,30 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Control+Shift+1 move container to workspace 1
+bindsym $mod+Control+Shift+2 move container to workspace 2
+bindsym $mod+Control+Shift+3 move container to workspace 3
+bindsym $mod+Control+Shift+4 move container to workspace 4
+bindsym $mod+Control+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+#Misc workspace commands
+
+# workspace <next|prev|next_on_output|prev_on_output>
+# workspace back_and_forth
+# workspace <name>
+# workspace number <name>
+
+# move [window|container] [to] workspace <name>
+# move [window|container] [to] workspace number <name>
+# move [window|container] [to] workspace <prev|next|current>
+
+# rename workspace <old_name> to <new_name>
+# rename workspace to <new_name>
 
 # reload the configuration file
 bindsym $mod+Shift+J reload
@@ -187,3 +205,17 @@ bar {
 
 #Run on startup
 #i3-msg "command" excutes i3 command
+#i3 bar defaults
+# bar {
+#     colors {
+#         background #000000
+#         statusline #ffffff
+#         separator #666666
+
+#         focused_workspace  #4c7899 #285577 #ffffff
+#         active_workspace   #333333 #5f676a #ffffff
+#         inactive_workspace #333333 #222222 #888888
+#         urgent_workspace   #2f343a #900000 #ffffff
+#     }
+# }
+
