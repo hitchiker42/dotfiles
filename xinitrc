@@ -9,6 +9,7 @@ xsetroot -cursor_name left_ptr
 setxkbmap -option terminate:ctrl_alt_bksp -option altwin:ctrl_win\
  -option caps:escape dvorak
 case "$2" in
+    2bwm)2bwm;;
     awesome)urxvt &
         awesome ;;
     dswm) dswm;;
@@ -16,10 +17,12 @@ case "$2" in
         dwm;;
     e17|enlightenment) enlightenment_start;;
     gnome) exec gnome-session;;
+    fluxbox)startfluxbox;;
     i3)i3;;
     lxde) startlxde;;
     notion) urxvt &
         notion;;
+    openbox)exec openbox-session;;
     qtile) urxvt &
         qtile ;;
     sawfish)urxvt&
@@ -33,5 +36,6 @@ case "$2" in
             xmodmap -e "add mod3 = Super_R"
         urxvt &
         xmonad;;
-    stumpwm|*) stumpwm ;;
+    stumpwm) stumpwm ;;
+    *)i3;;
 esac
