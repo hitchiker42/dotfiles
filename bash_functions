@@ -37,14 +37,6 @@ ls | grep "$@"
 ps-search(){
 ps -e | grep "$@"
 }
-#rename a file to its md5sum + a given extension
-md5-rename(){
-if [[ -n "$1" ]] && [[ -n "$2" ]] && [[ -f "$1" ]]; then
- mv -f "$1" `md5sum "$1" | awk '{print $1}'`.$2 &>/dev/null
-else
- echo -e 'usage: md5-rename filename extension\n\trename filename to `md5sum filename`.extension'
-fi
-}
 #set apple function keys, 1 for media keys, 2 for fn keys, 0 for always fn keys
 fn-keys(){
 echo "$1" | sudo tee /sys/module/hid_apple/parameters/fnmode
@@ -54,6 +46,21 @@ qemu(){
 }
 background(){
 "$@" &>/dev/null &
+#rename a file to its md5sum + a given extension
+md5-rename(){
+if [[ -n "$1" ]] && [[ -n "$2" ]] && [[ -f "$1" ]]; then
+ MD5=$(md5sum "$1" | awk '{print $1}')
+ if [[ -f "$MD5"."$2" ]]; then
+  echo "file exists"
+  return 2;
+ else
+  mv -f "$1" "$MD5"."$2" &>/dev/null
+  return 0;
+ fi
+else
+ echo -e 'usage: md5-rename filename extension\n\trename filename to `md5sum filename`.extension'
+ return 1;
+fi
 disown
 }
 #not super useful as is, but has potential to be useful
