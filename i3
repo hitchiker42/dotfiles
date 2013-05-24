@@ -20,7 +20,7 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # Boarders on edges of screen?(none/vertical/horizontal/both)
-hide_edge_boarders both
+#hide_edge_boarders both
 # Boarders on new windows(normal|1pixel|none|pixel n)
 # weirdly I like the boarders
 new_window normal
