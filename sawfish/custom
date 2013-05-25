@@ -1,0 +1,16 @@
+;; Sawfish user customization -- do not edit by hand!
+;; Use the configurator instead.
+;; sawfish version 1.9.99, written Sat May 25 10:48:05 2013
+
+(custom-set-typed-variable (quote filemanager-program) (quote "emelfm2") (quote string))
+(custom-set-typed-variable (quote xterm-program) (quote "urxvt") (quote string))
+(custom-set-typed-variable (quote default-frame-style) (quote Crux) (quote frame-style))
+(custom-set-typed-variable (quote root-wallpaper) (quote "/home/tucker/Pictures/Wallpapers/9d1f460730bbcbfb1da77ea1a36ce2b31cf65d05.png") (quote image))
+(custom-set-typed-variable (quote init-wallpaper) (quote t) (quote boolean))
+(custom-set-typed-variable (quote default-font) (quote ("Pango" . "DejaVu Sans 0")) (quote font))
+(custom-set-typed-variable (quote workspace-names) (quote ("1")) (quote (list string "Workspace names")))
+(custom-set-typed-variable (quote edge-actions-enabled) (quote t) (quote boolean))
+(custom-set-typed-variable (quote use-custom-button-cursor-shape) (quote t) (quote boolean))
+(custom-set-typed-variable (quote styletab-c:styles) (quote Default) (quote symbol))
+(custom-set-typed-variable (quote styletab-c:custom-button-width) (quote t) (quote boolean))
+(custom-set-typed-variable (quote styletab-c:proposals) (quote Default) (quote symbol))

@@ -1,0 +1,8 @@
+(require 'sawfish-defaults)
+(define my-emacs-keymap (make-keymap))
+(bind-keys global-keymap "C-t" my-emacs-keymap)
+(bind-keys my-emacs-keymap
+           "c" '(run-shell-command "urxvt")
+           "e" '(run-shell-command "emacs")
+           "i" '(run-shell-command "conkeror")
+	   "d" '(run-shell-command "dmenu-run"))
