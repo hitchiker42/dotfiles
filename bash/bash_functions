@@ -46,6 +46,7 @@ qemu(){
 }
 background(){
 "$@" &>/dev/null &
+}
 #rename a file to its md5sum + a given extension
 md5-rename(){
 if [[ -n "$1" ]] && [[ -n "$2" ]] && [[ -f "$1" ]]; then
