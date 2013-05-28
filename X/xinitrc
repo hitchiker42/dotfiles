@@ -18,7 +18,18 @@ case "$2" in
     e17|enlightenment) enlightenment_start;;
     gnome) exec gnome-session;;
     fluxbox)startfluxbox;;
-    i3)i3;;
+    i3)
+        if [ -z "$3" ]; then
+            i3
+        elif [ "emacs" == "$3" ]; then
+            i3 -c /home/tucker/.i3/emacs.
+            config
+        elif [ "R_Alt" == "$3" ]; then
+            xmodmap -e "keycode 0x6c = R_Super;remove mod1 = R_Super;add mod3 = R_Super"
+            i3 -c /home/tucker/.i3/R_Alt.config
+        else 
+            echo "Use with no args, or use emacs or R_Alt for alternate config" && return
+        fi;;
     lxde) startlxde;;
     notion) urxvt &
         notion;;
