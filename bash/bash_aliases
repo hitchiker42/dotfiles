@@ -40,6 +40,11 @@ alias pacs='pacman -Ss'
 alias pacupg='sudo pacman -Syu'
 alias pacinl='sudo pacman -U'
 alias pacrm='sudo pacman -R'
+#transmission shortcuts
+alias tr-remote='transmission-remote'
+alias tr-cli='transmission-cli'
+alias tr-daemon='transmission-daemon'
+alias tr-gui='transmission-gtk'
 #less common program shortcuts/aliases
 alias ldc=ldc2
 alias sbcl=/home/tucker/usr/bin/sbcl
@@ -48,3 +53,5 @@ alias jisho=tagainijisho
 alias core-temp='sensors | grep Core'
 alias wine_jp='LANG=ja_JP.UTF-8 wine'
 alias emelfm2='GTK2_RC_FILES="/home/tucker/.gtkrc-zenburn" emelfm2'
+alias clear-ram="sudo bash -c 'sync;echo 3 >/proc/sys/vm/drop_caches'"
+alias links=elinks

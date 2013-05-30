@@ -68,3 +68,12 @@ disown
 rm-if-not(){
 ls | grep "[[:print:]]*[^\"$1\"]"
 }
+#do "$2-$#" "$1"times
+do-times(){
+    COUNT="$1"
+    shift
+    while [[ $COUNT -gt 0 ]];do
+	"$@"
+	COUNT=$((COUNT-1))
+    done
+}
