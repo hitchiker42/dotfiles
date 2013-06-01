@@ -77,3 +77,11 @@ do-times(){
 	COUNT=$((COUNT-1))
     done
 }
+zip-dir(){
+ZIP_NAME="$1"
+shfit
+find "$@" | zip "$ZIP_NAME" -@
+}
+rsync-backup(){
+sudo rsync -aAXv /* "$1" --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found}
+}

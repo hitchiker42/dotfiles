@@ -2,9 +2,9 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 ;;maybe set init file
-;;(setq user-init-file "~/.emacs.d/init.el"
+(setq user-init-file "~/.emacs.d/init.el"
 ;;and load in
-;;(load-file user-init-file)
+(load-file user-init-file)
 ;;load packages, pretty important
 (package-initialize ())
 ;;load path modifications & slime stuff
@@ -12,27 +12,29 @@
 (setq inferior-lisp-program "/home/tucker/usr/bin/sbcl")
 (load "/home/tucker/Repo/emacs/geiser/elisp/geiser-load")
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
-;;load stuff, and one convient alias
+;;load stuff, and aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'elisp-mode 'emacs-lisp-mode)
+(defalias 'eshell-new 'multi-eshell)
 (global-set-key (kbd "C-c r s") 'replace-string)
 (global-set-key (kbd "C-c r") 'replace-regexp)
 (require 'llvm-mode)
 (require 'ats-mode)
 (require 'rainbow-delimiters)
 (require 'auto-complete)
-(require 'quack)
-(require 'geiser)
+;;(require 'quack)
+;;(require 'geiser)
 (require 'w3m-autoloads)
-(require 'go-mode)
-(require 'shen-mode)
 (require 'magit)
-;;need to add this elisp file to the Repo
 (require 'wind-swap)
 ;;startup any useful modes
 (global-rainbow-delimiters-mode)
 (global-auto-complete-mode)
 (icicles-mode)
 (windmove-default-keybindings)
+(setq multi-eshell-shell-function '(eshell))
+;;set mode to sml-mode when opening a file foo.fun
+(add-to-list 'auto-mode-alist '("\\.fun\\'" . sml-mode))
 ;;;Maxima
 ;;(add-to-list 'load-path ${rootdir}/usr/share/maxima/version/emacs)
 (autoload 'maxima-mode "maxima" "Maxima mode" t)
@@ -69,3 +71,9 @@
 ;;  'compilation-error-regexp-alist
 ;;  '("^\\([^ \n]+\\)(\\([0-9]+\\)): \\(?:error\\|.\\|warnin\\(g\\)\\|remar\\(k\\)\\)"
 ;;    1 2 nil (3 . 4)))
+;;;Display message instead of beeping
+(setq ring-bell-function
+     (lambda ()
+        (unless (memq this-command
+                      '(isearch-abort abort-recursive-edit exit-minibuffer keyboard-quit))
+          (message "*beep*"))))
