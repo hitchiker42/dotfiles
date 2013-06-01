@@ -85,3 +85,17 @@ find "$@" | zip "$ZIP_NAME" -@
 rsync-backup(){
 sudo rsync -aAXv /* "$1" --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found}
 }
+mlton-keep(){
+MLTON_OPTS='-keep machine -keep ssa -keep dot -keep rssa -keep xml -keep ssa2  -keep sxml'
+MLTON_BASENAME=$(echo "$1" | awk '{print(substr($0,1,length-4))}')
+MLTON_PROG="$1"
+shift
+MLTON_OPTS="$MLTON_OPTS -show-def-use $MLTON_BASENAME.def_use -show-basis $MLTON_BASENAME.basis"
+if [ -f $MLTON_BASENAME ]; then
+    mv $MLTON_BASENAME $MLTON_BASENAME.old
+elif [ ! -d $MLTON_BASENAME ]; then
+    mkdir $MLTON_BASENAME
+fi
+(cd $MLTON_BASENAME && mlton $MLTON_OPTS -output $MLTON_BASENAME ../$MLTON_PROG $@)
+}
+
