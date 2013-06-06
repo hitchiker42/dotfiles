@@ -33,7 +33,10 @@
 (icicles-mode)
 (windmove-default-keybindings)
 (setq multi-eshell-shell-function '(eshell))
-;;set mode to sml-mode when opening a file foo.fun
+(toggle-diredp-find-file-reuse-dir t)
+;;auto-modes
+(add-to-list 'auto-mode-alist '("/tmp/mutt.*" . mail-mode))
+(add-to-list 'auto-mode-alist '("PKGBUILD" . pkgbuild-mode))
 (add-to-list 'auto-mode-alist '("\\.fun\\'" . sml-mode))
 ;;;Maxima
 ;;(add-to-list 'load-path ${rootdir}/usr/share/maxima/version/emacs)
