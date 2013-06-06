@@ -38,6 +38,10 @@
 (add-to-list 'auto-mode-alist '("/tmp/mutt.*" . mail-mode))
 (add-to-list 'auto-mode-alist '("PKGBUILD" . pkgbuild-mode))
 (add-to-list 'auto-mode-alist '("\\.fun\\'" . sml-mode))
+;; probably a more elegant way to do this, but eh, regexps are annoying
+(add-to-list 'auto-mode-alias '(".bashrc" . sh-mode))
+(add-to-list 'auto-mode-alias '(".bash_aliases" . sh-mode))
+(add-to-list 'auto-mode-alias '(".bash_functions" . sh-mode))
 ;;;Maxima
 ;;(add-to-list 'load-path ${rootdir}/usr/share/maxima/version/emacs)
 (autoload 'maxima-mode "maxima" "Maxima mode" t)

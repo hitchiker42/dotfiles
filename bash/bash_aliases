@@ -21,13 +21,20 @@ alias xclip="xclip -selection clipboard"
 alias 1920='xrandr -s 1920x1200'
 alias 1024='xrandr -s 1024x768'
 alias 800='xrandr -s 800x600'
-#yum shortcuts
-alias ys="yum search"
-alias yp="yum info"
-alias yl="yum list"
-alias yu="sudo yum update"
-alias yi="sudo yum install"
-alias yr="sudo yum remove"
+#yum shortcuts, or yaourt shortcuts
+# alias ys="yum search"
+alias ys="yaourt -Sas"
+# alias yp="yum info"
+alias yp='yaourt -Sai'
+# alias yl="yum list"
+# alias yu="sudo yum update"
+alias yu='yaourt -Sayu'
+# alias yi="sudo yum install"
+alias yi='yaourt -Sa'
+# alias yr="sudo yum remove"
+alias yrm='yaourt -Ra'
+alias yb='yaourt -Sab'
+alias yil='yaourt -Sda'
 #git shortcuts
 alias gi="git commit"
 alias gu="git pull"
@@ -36,10 +43,12 @@ alias ga="git add"
 alias gb="git branch"alias sizes="du -sh"
 #pacman shortcuts
 alias pacin='sudo pacman -S'
+alias paci=pacin
 alias pacs='pacman -Ss'
 alias pacupg='sudo pacman -Syu'
 alias pacinl='sudo pacman -U'
 alias pacrm='sudo pacman -R'
+alias pacq='pacman -Q'
 #transmission shortcuts
 alias tr-remote='transmission-remote'
 alias tr-cli='transmission-cli'
@@ -55,3 +64,4 @@ alias wine_jp='LANG=ja_JP.UTF-8 wine'
 alias emelfm2='GTK2_RC_FILES="/home/tucker/.gtkrc-zenburn" emelfm2'
 alias clear-ram="sudo bash -c 'sync;echo 3 >/proc/sys/vm/drop_caches'"
 alias links=elinks
+alias loadrc='. ~/.bashrc'

@@ -98,4 +98,19 @@ elif [ ! -d $MLTON_BASENAME ]; then
 fi
 (cd $MLTON_BASENAME && mlton $MLTON_OPTS -output $MLTON_BASENAME ../$MLTON_PROG $@)
 }
-
+do-ext(){
+if [ -z "$2" ]; then
+  echo "usage: do-ext ext command"	
+  return
+fi
+#need to test, make sure it works with the referances and all
+find -name "*.$1" -print0 | xargs -0 "$@"
+}
+mv-ext(){
+do-ext "$1" mv -t "$2"
+}
+safe-source(){
+if [ -f "$1" ];then
+    . "$1"
+fi
+}

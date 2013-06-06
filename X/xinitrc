@@ -30,7 +30,7 @@ case "$2" in
         else 
             echo "Use with no args, or use emacs or R_Alt for alternate config" && return
         fi;;
-    lxde) startlxde;;
+    lxde) exec startlxde;;
     notion) urxvt &
         notion;;
     openbox)exec openbox-session;;

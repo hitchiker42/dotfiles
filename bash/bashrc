@@ -5,7 +5,6 @@
 if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
-
 # User specific aliases, if they exist
 if [ -f $HOME/.bash_aliases ]; then
     . $HOME/.bash_aliases
@@ -31,4 +30,5 @@ fi
 EDITOR=zile
 
 #this will fuck up rsync,etc so we check for interactive shell first
-command cowsay $(fortune -a)
+#really this is just kinda silly
+#command cowsay $(fortune -a)
