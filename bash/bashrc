@@ -5,6 +5,8 @@
 if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
+[[ -f /etc/bash.bashrc ]] && . /etc/bash.bashrc
+[[ -f /etc/profile ]] && . /etc/profile
 # User specific aliases, if they exist
 if [ -f $HOME/.bash_aliases ]; then
     . $HOME/.bash_aliases
@@ -26,9 +28,5 @@ fi
 if [[ -n $bin ]]; then
     export PATH=$PATH:$bin
 fi
-
-EDITOR=zile
-
-#this will fuck up rsync,etc so we check for interactive shell first
-#really this is just kinda silly
-#command cowsay $(fortune -a)
+#export editor
+export EDITOR=zile

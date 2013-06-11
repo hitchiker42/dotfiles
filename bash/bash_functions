@@ -64,6 +64,11 @@ else
 fi
 disown
 }
+md5-rename-all(){
+for i in $(ls *."$1");do
+md5-rename "$i" "$1" &>/dev/null
+done
+}
 #not super useful as is, but has potential to be useful
 rm-if-not(){
 ls | grep "[[:print:]]*[^\"$1\"]"
@@ -113,4 +118,9 @@ safe-source(){
 if [ -f "$1" ];then
     . "$1"
 fi
+}
+zip-dir(){
+ZIP_NAME="$1"
+shfit
+find "$@" | zip "$ZIP_NAME" -@
 }

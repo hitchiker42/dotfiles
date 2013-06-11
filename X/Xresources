@@ -11,10 +11,12 @@ URxvt.scrollBar: false
 URxvt*font: xft:Inconsolata:pixelsize=14:antialias=true:hinting=true
 URxvt*boldFont: xft:Inconsolata:bold:pixelsize=14:antialias=true:hinting=true
 !Perl extensions
-URxvt.perl-ext-common: default,matcher,tabbed,clipboard,vtwheel
-URxvt.urlLauncher: firefox
-URxvt.matcher.button: 2
-URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt.perl-ext-common: default,url-select,tabbed,clipboard,vtwheel
+URxvt.urlLauncher: /usr/bin/firefox -new-tab
+!URxvt.matcher.button: 1
+!URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt.keysym.M-u: perl:url-select:select_next
+Urxvt.url-select.underline: true
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard
