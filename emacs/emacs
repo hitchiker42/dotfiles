@@ -16,6 +16,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'elisp-mode 'emacs-lisp-mode)
 (defalias 'eshell-new 'multi-eshell)
+(defalias 'perl-mode 'cperl-mode)
 (global-set-key (kbd "C-c r s") 'replace-string)
 (global-set-key (kbd "C-c r") 'replace-regexp)
 (require 'llvm-mode)
@@ -38,10 +39,7 @@
 (add-to-list 'auto-mode-alist '("/tmp/mutt.*" . mail-mode))
 (add-to-list 'auto-mode-alist '("PKGBUILD" . pkgbuild-mode))
 (add-to-list 'auto-mode-alist '("\\.fun\\'" . sml-mode))
-;; probably a more elegant way to do this, but eh, regexps are annoying
-(add-to-list 'auto-mode-alias '(".bashrc" . sh-mode))
-(add-to-list 'auto-mode-alias '(".bash_aliases" . sh-mode))
-(add-to-list 'auto-mode-alias '(".bash_functions" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\`\\.?bash" . sh-mode))
 ;;;Maxima
 ;;(add-to-list 'load-path ${rootdir}/usr/share/maxima/version/emacs)
 (autoload 'maxima-mode "maxima" "Maxima mode" t)
@@ -84,3 +82,37 @@
         (unless (memq this-command
                       '(isearch-abort abort-recursive-edit exit-minibuffer keyboard-quit))
           (message "*beep*"))))
+(define-key global-map "\C-cer" 'eval-region)
+(define-key global-map "\C-ceb" 'eval-buffer)
+(define-key global-map "\C-cef" 'eval-defun)
+(define-key global-map "\C-cee" 'eval-expression)
+      kept-old-versions 2)   ; and some old ones
+
+(eval-after-load "doremi-cmd"
+  '(progn
+     (unless (fboundp 'doremi-prefix)
+       (defalias 'doremi-prefix (make-sparse-keymap))
+       (defvar doremi-map (symbol-function 'doremi-prefix)
+         "Keymap for Do Re Mi commands."))
+     (define-key global-map "\C-xt"  'doremi-prefix)
+     (define-key doremi-map "b" 'doremi-buffers+) ; Buffer                        `C-x t b'
+     (define-key doremi-map "g" 'doremi-global-marks+) ; Global mark              `C-x t g'
+     (define-key doremi-map "m" 'doremi-marks+) ; Mark                            `C-x t m'
+     (define-key doremi-map "r" 'doremi-bookmarks+) ; `r' for Reading books       `C-x t r'
+     (define-key doremi-map "s" 'doremi-color-themes+) ; `s' for color Schemes    `C-x t s'
+     (define-key doremi-map "w" 'doremi-window-height+))) ; Window                `C-x t w'
+(require 'doremi)
+(require 'doremi-cmd)
+(define-prefix-command 'f2-map)
+(define-key global-map [f2] 'f2-map)
+(define-key f2-map "c" 'comment-region)
+(define-key f2-map "u" 'uncomment-region)
+(define-key f2-map "w" 'whitespace-cleanup)
+(define-key f2-map "i" 'indent-region)
+(define-key f2-map "e" 'multi-eshell)
+
+(setq org-todo-keywords
+      '((sequence "TODO" "|" "DONE")
+        (sequence "|" "CANCELED")
+        (sequence "OPT" "|" "OPT(DONE)")
+        (sequence "OPT(CANCELED)")))
