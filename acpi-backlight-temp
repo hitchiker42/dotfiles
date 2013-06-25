@@ -1,0 +1,8 @@
+#!/bin/bash
+bl_dev=/sys/class/backlight/gmux_backlight
+step=7136
+
+case $1 in
+  -) echo $((`cat $bl_dev/brightness` - $step)) >$bl_dev/brightness;;
+  +) echo $((`cat $bl_dev/brightness` + $step)) >$bl_dev/brightness;;
+esac
