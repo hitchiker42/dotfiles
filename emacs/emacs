@@ -29,6 +29,7 @@
 (require 'mlton)
 (require 'auto-async-byte-compile)
 (require 'wind-swap)
+(require 'uniquify)
 ;;;Startup any useful modes
 (global-rainbow-delimiters-mode)
 (global-auto-complete-mode)
@@ -36,14 +37,17 @@
 (windmove-default-keybindings)
 (toggle-diredp-find-file-reuse-dir 1)
 (menu-bar-showhide-tool-bar-menu-customize-disable)
-;;;Set vars
-(setq multi-eshell-shell-function '(eshell))
-(setq indent-tabs-mode nil)
-;;This regexp should ignore all backup files
-(setq auto-async-byte-compile-exclude-files-regexp ".*~$\|^#.*#$")
-(setq emacs-lisp-mode-hook '(turn-on-eldoc-mode enable-auto-async-byte-compile-mode))
-(setq org-replace-disputed-keys t)
-
+(menu-bar-no-scroll-bar)
+(setq-default indent-tabs-mode nil)
+(setq 
+ ;;not sure if this works
+ multi-eshell-shell-function '(eshell)
+ icicle-TAB/S-TAB-only-completes-flag t
+ org-replace-disputed-keys t
+ emacs-lisp-mode-hook '(turn-on-eldoc-mode enable-auto-async-byte-compile-mode)
+ ;;This regexp should ignore all backup files
+ auto-async-byte-compile-exclude-files-regexp ".*~$\|^#.*#$"
+ apropos-do-all t)
 ;;;Auto-modes
 (add-to-list 'auto-mode-alist '("/tmp/mutt.*" . mail-mode))
 (add-to-list 'auto-mode-alist '("PKGBUILD" . pkgbuild-mode))
@@ -56,6 +60,11 @@
 (define-key global-map "\C-ceb" 'eval-buffer)
 (define-key global-map "\C-cef" 'eval-defun)
 (define-key global-map "\C-cee" 'eval-expression)
+(define-key global-map "\C-s" 'isearch-forward-regexp)
+(define-key global-map "\C-r" 'isearch-backward-regexp)
+(define-key global-map "\C-\M-s" 'isearch-forward)
+(define-key global-map "\C-\M-r" 'isearch-backward)
+(define-key global-map "\C-x\C-b" 'ibuffer)
 ;;prefix keys ESC(esc-map),C-h(help-map),C-c(mode-specific-map)
 ;;C-x(ctl-x-map),C-x RET(mule-keymap),C-x 4/5(ctl-4-map,ctl-5-map)
 ;;C-x 6 (2C-mode-map),C-x v(vc-prefix-map),M-g(goto-map),M-s(search-map)
