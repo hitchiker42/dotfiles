@@ -54,24 +54,21 @@
 (add-to-list 'auto-mode-alist '("\\.fun\\'" . sml-mode))
 (add-to-list 'auto-mode-alist '("\\`\\.?bash" . sh-mode));opening .bash* sets sh-mode
 ;;;Keys
-(define-key global-map "\C-c\C-rs" 'replace-string)
-(define-key global-map "\C-cr"  'replace-regexp)
+;;Keys
+;;regexp stuff
+(global-set-key [?\C-c ?\C-r ?s]  'replace-string)
+(global-set-key [?\C-c ?r] 'replace-regexp)
+(global-set-key [?\C-s] 'isearch-forward-regexp)
+(global-set-key [?\C-r] 'isearch-backward-regexp)
+(global-set-key [?\C-\M-s] 'isearch-forward)
+(global-set-key [?\C-\M-r] 'isearch-backward)
+;;eval stuff
 (define-key global-map "\C-cer" 'eval-region)
 (define-key global-map "\C-ceb" 'eval-buffer)
 (define-key global-map "\C-cef" 'eval-defun)
 (define-key global-map "\C-cee" 'eval-expression)
-(define-key global-map "\C-s" 'isearch-forward-regexp)
-(define-key global-map "\C-r" 'isearch-backward-regexp)
-(define-key global-map "\C-\M-s" 'isearch-forward)
-(define-key global-map "\C-\M-r" 'isearch-backward)
-(define-key global-map "\C-x\C-b" 'ibuffer)
-;;prefix keys ESC(esc-map),C-h(help-map),C-c(mode-specific-map)
-;;C-x(ctl-x-map),C-x RET(mule-keymap),C-x 4/5(ctl-4-map,ctl-5-map)
-;;C-x 6 (2C-mode-map),C-x v(vc-prefix-map),M-g(goto-map),M-s(search-map)
-;;M-o(facemenu-map), C-x @,C-x a i,C-x ESC & ESC ESC(unamed keymaps)
-
-;;;My map, f2 as prefix key
-(require 'my-banish-mouse)
+;;f2-map
+(require 'my-banish)
 (define-prefix-command 'f2-map)
 (define-key global-map [f2] 'f2-map)
 (define-key f2-map "c" 'comment-region)
@@ -81,6 +78,48 @@
 (define-key f2-map "e" 'multi-eshell)
 (define-key f2-map "p" 'list-packages)
 (define-key f2-map "b" 'my-banish-mouse)
+;;prefix keys ESC(esc-map),C-h(help-map),C-c(mode-specific-map)
+;;C-x(ctl-x-map),C-x RET(mule-keymap),C-x 4/5(ctl-4-map,ctl-5-map)
+;;C-x 6 (2C-mode-map),C-x v(vc-prefix-map)
+;;M-o(facemenu-map), C-x @,C-x a i,C-x ESC & ESC ESC(unamed keymaps)
+;;C-x ESC
+;; (keymap 
+;;  (backtab . icicle-complete-keys) 
+;;  (58 . repeat-complex-command); :
+;;  (27 . repeat-complex-command));ESC
+;;;M-s(search-map)
+;; (keymap 
+;;  (backtab . icicle-complete-keys) 
+;;  (46 . isearch-forward-symbol-at-point) ;.
+;;  (95 . isearch-forward-symbol) ;_
+;;  (119 . isearch-forward-word) ;w
+;;  (104 keymap ;h
+;;       (backtab . icicle-complete-keys) 
+;;       (119 . hi-lock-write-interactive-patterns);w
+;;       (102 . hi-lock-find-patterns);f
+;;       (117 . unhighlight-regexp);u
+;;       (46 . highlight-symbol-at-point);.
+;;       (108 . highlight-lines-matching-regexp);l
+;;       (112 . highlight-phrase);p
+;;       (114 . highlight-regexp));r
+;;  (111 . occur))
+;;;M-g(goto-map)
+;; (keymap 
+;;  (backtab . icicle-complete-keys)
+;;  (9 . move-to-column);tab
+;;  (112 . previous-error);p
+;;  (110 . next-error);n
+;;  (27 keymap ;;ESC/Meta/Alt
+;;      (backtab . icicle-complete-keys)
+;;      (112 . previous-error);p
+;;      (110 . next-error);n
+;;      (103 . goto-line));g
+;;  (103 . goto-line);(M-)g
+;;  (99 . goto-char));c
+;; \M-p and \M-n are unbound in the global keymap
+
+
+
 ;;;Maxima
 ;;(add-to-list 'load-path ${rootdir}/usr/share/maxima/version/emacs)
 (autoload 'maxima-mode "maxima" "Maxima mode" t)
