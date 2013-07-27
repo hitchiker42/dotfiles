@@ -14,6 +14,28 @@
       (insert quote)
       (goto-char (1+ end))
       (insert quote)))))
-
+(defun make-scratch (mode &optional name switch)
+"create a scratch buffer with major mode mode,
+if optional argument name is given the buffer will be named name
+otherwise the buffer will be named *modename-scratch*, where modename is
+the name of mode with any -mode suffix removed"
+  (interactive "amode:\ni\np")
+  (let ((name 
+         (if (null name) 
+             (replace-regexp-in-string "-?mode" ""
+                                       (format "*%s-scratch*" mode))
+           name)))
+    (with-current-buffer (generate-new-buffer name)
+      (funcall mode))
+  (if (not (null switch))
+      (switch-to-buffer name))))
+(defun find-files (files)
+"open multiple files at once, flatten nested lists by one level
+ if need be (kludge to make this work in eshell"
+  (dolist (i files) 
+    (if (listp i)
+        (dolist (j i)
+          (find-file j))
+      (find-file i))))
 
 
