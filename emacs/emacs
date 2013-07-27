@@ -1,3 +1,4 @@
+;;; -*- mode
 ;;;My emacs lisp init file, Everything execept for custom set vars/faces 
 (add-to-list 'load-path "/home/tucker/.emacs.d/my-elisp")
 (add-to-list 'load-path "/home/tucker/.emacs.d")
@@ -163,12 +164,12 @@
        (defvar doremi-map (symbol-function 'doremi-prefix)
          "Keymap for Do Re Mi commands."))
      (define-key global-map "\C-xt"  'doremi-prefix)
-     (define-key doremi-map "b" 'doremi-buffers+) ; Buffer                        `C-x t b'
-     (define-key doremi-map "g" 'doremi-global-marks+) ; Global mark              `C-x t g'
-     (define-key doremi-map "m" 'doremi-marks+) ; Mark                            `C-x t m'
-     (define-key doremi-map "r" 'doremi-bookmarks+) ; `r' for Reading books       `C-x t r'
-     (define-key doremi-map "s" 'doremi-color-themes+) ; `s' for color Schemes    `C-x t s'
-     (define-key doremi-map "w" 'doremi-window-height+))) ; Window                `C-x t w'
+     (define-key doremi-map "b" 'doremi-buffers+) ; Buffer `C-x t b'
+     (define-key doremi-map "g" 'doremi-global-marks+) ; Global mark `C-x t g'
+     (define-key doremi-map "m" 'doremi-marks+) ; Mark `C-x t m'
+     (define-key doremi-map "r" 'doremi-bookmarks+) ; `r' for Reading books `C-x t r'
+     (define-key doremi-map "s" 'doremi-color-themes+) ; `s' for color Schemes `C-x t s'
+     (define-key doremi-map "w" 'doremi-window-height+))) ; Window `C-x t w'
 (require 'doremi)
 (require 'doremi-cmd)
 
@@ -178,3 +179,10 @@
         (sequence "|" "CANCELED")
         (sequence "OPT" "|" "OPT(DONE)")
         (sequence "OPT(CANCELED)")))
+
+(put 'overwrite-mode 'disabled t)
+(put 'narrow-to-region 'enabled t)
+
+;; Local Variables:
+;; mode: emacs-lisp
+;; End:
