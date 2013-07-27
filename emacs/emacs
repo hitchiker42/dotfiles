@@ -57,12 +57,12 @@
 ;;;Keys
 ;;Keys
 ;;regexp stuff
-(global-set-key [?\C-c ?\C-r ?s]  'replace-string)
-(global-set-key [?\C-c ?r] 'replace-regexp)
-(global-set-key [?\C-s] 'isearch-forward-regexp)
-(global-set-key [?\C-r] 'isearch-backward-regexp)
-(global-set-key [?\C-\M-s] 'isearch-forward)
-(global-set-key [?\C-\M-r] 'isearch-backward)
+(define-key global-map [?\C-c ?\C-r ?s]  'replace-string)
+(define-key global-map [?\C-c ?r] 'replace-regexp)
+(define-key global-map [?\C-s] 'isearch-forward-regexp)
+(define-key global-map [?\C-r] 'isearch-backward-regexp)
+(define-key global-map [?\C-\M-s] 'isearch-forward)
+(define-key global-map [?\C-\M-r] 'isearch-backward)
 ;;eval stuff
 (define-key global-map "\C-cer" 'eval-region)
 (define-key global-map "\C-ceb" 'eval-buffer)

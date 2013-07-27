@@ -37,5 +37,12 @@ the name of mode with any -mode suffix removed"
         (dolist (j i)
           (find-file j))
       (find-file i))))
+(defmacro as-command (fun &rest args)
+"return a fun as a command to be called interactively
+mainly used to call a non interactive elisp function interactively
 
+function is called with arguments args, interactive spec is always nil"
+(if (commandp fun)
+    'fun
+  `(lambda () (interactive) (,fun ,@args))))
 
