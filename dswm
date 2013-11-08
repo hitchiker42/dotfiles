@@ -17,25 +17,25 @@
 
 ;;;;I'm pretty sure this file is wrapped in an implicit
 ;;;;in package dswm
+;;;;but....
+(in-package #:dswm)
+(export '(raise-or-run-group))
 
 ;;;; Change the prefix key to something else
 ;; Maybe would be a good thing to use (kbd "Insert")
 ;; for prefix key
 (set-prefix-key (kbd "C-o"))
-
 ;;;; Terminal emulator program (default xterm)
 (setf *terminal* "urxvt")
-
 ;;;; Web Browser (default conkeror)
-;;(setf *browser* "firefox")
-
+(setf *browser* "conkeror")
 ;;;; Default shell program
 (setf *shell-program* "/bin/bash")
-
+;;;; pdf-viewer
 (setf *pdf-viewer* "qpdfview --unique --instance dswm")
-
 ;;;; Emacs implementation (default emacs, can be used xemacs, climacs etc)
 (setf *emacs* "emacsclient -c")
+;;;; Default editor
 (setf *editor* *emacs*)
 ;;;; Messages window gravity
 ;; ; :top-left :top-right :bottom-left :bottom-right :center
@@ -64,15 +64,13 @@
 (setf *mouse-focus-policy* :click)
 
 ;;;; Name of default group
-;; (setq *default-group-name* "Main")
+(setq *default-group-name* "1")
 
-;;;; Style of window borders
-;; ; :thick :thin :tight :none
+;;;; Style of window borders (:thick :thin :tight :none)
  (setf *window-border-style* :tight)
 
 ;;;; Mode line
-;; Mode line position (default :top)
-;; :top or :bottom
+;; Mode line position (:top :bottom)
 (setf *mode-line-position* :bottom)
 
 ;; How thick the mode line border
@@ -82,34 +80,79 @@
 ;; (setf *mode-line-pad-x* 6)
 
 ;; Define mode line background color
-;; (setf *mode-line-background-color* "black")
+(setf *mode-line-background-color* "grey20")
 
 ;; Define mode line foreground color
-;; (setf *mode-line-foreground-color* "lightgreen")
+(setf *mode-line-foreground-color* "grey60")
 
 ;; Define mode line border color
 ;; (setf *mode-line-border-color* "lightyellow")
 
+
 ;;;; Debug level: 0-5
 (setf *debug-level* 0)
 
+;(defmacro symbol-splice (&rest symbols)
+;"returns the symbol created by concatinating the names of symbols"
+;  `(intern (apply #'concatenate 'string (mapcar #'symbol-name ',symbols))
+;          *package*))
+;(defmacro symbol-splice-strings (&rest strings); &key (literal-case nil))
+;"returns the symbol with the name formed by concatinating strings"
+;(let ((upcase (if literal-case #'identity #'string-upcase)))
+;  `(intern (concatenate 'string ,@(mapcar #'string-upcase strings))
+;           *package*))
 ;;;;
 ;;;; Custom keybindings:
 ;;;;
 ;rebind keys
-(defvar *ctl-x-map*
-  (let ((m (make-sparse-keymap)))
-    ;;define some keys
-    ;;(define-key m (kbd "key") "command")
-    m))
+;(defmacro define-keymap (name)
+;  `(defvar ,name 
+;     (let ((m (make-sparse-keymap)))
+;       m)))n
+  
+;(defvar *x-map*
+(defvar *x-map*
+     (let ((m (make-sparse-keymap)))
+       m))
+(defvar *w-map*
+     (let ((m (make-sparse-keymap)))
+       m))
+;(define-keymap *x-map*)
+;(define-keymap *w-map*)
+(define-key *root-map* (kbd "x") '*x-map*)
+;(defvar *w-map*
+;  (let ((m (make-sparse-keymap)))
+;    m))
+(define-key *root-map* (kbd "w") '*w-map*)
+(defun define-key-map (key command map)
+  (define-key map (kbd key) command))
+;why doesn't this work?
+;(defmacro define-key-map-fun (map mapname)
+;  `(defun ,(symbol-splice define-key- mapname -map) (key command)
+;     (define-key ,map (kbd key) command)))
+;(define-key-map-fun *root-map* root)
+;(define-key-map-fun *x-map* x)
+;(define-key-map-fun *w-map* w)
 (defun define-key-root-map (key command)
-  (define-key *root-map* (kbd key) command))
+  (define-key-map key command *root-map*))
+(defun define-key-x-map (key command)
+  (define-key-map key command *x-map*))
+(defun define-key-w-map (key command)
+  (define-key-map key command *w-map*))
 (let ((run-pdf-viewer (concat "exec" *pdf-viewer*)))
-  (dolist (key-command '(("C-R" . "loadrc") ("u" . "fullscreen")
-                         ("i" . "browser") ("C-i" . "info")
-                         ("RET" . "terminal")
-                         ("v" . run-pdf-viewer)))
+  (dolist 
+      (key-command 
+        '(("C-R" . "loadrc") ("u" . "fullscreen") ("i" . "browser") 
+          ("C-i" . "info") ("RET" . "terminal") ("q" . "only")
+          ("C-0" . "remove") ("v" . run-pdf-viewer) 
+          ("0" . "renumber")
+          ("C-\\" . "question-kill-dswm")))
     (define-key-root-map (car key-command) (cdr key-command))))
+(dolist (key-command
+          '(("1" . "only")("2" . "vsplit")("3" . "hsplit")
+            ("0" . "remove")("k" ."question-kill-window")
+            ("m" . "mode-line") ("n" . "renumber")))
+  (define-key-x-map (car key-command) (cdr key-command)))
 ;;;; Read some doc with gv
 ;; (define-key *root-map* (kbd "d") "exec gv")
 ;;;; Lock screen
@@ -128,19 +171,19 @@
 
 ;; ;;;; Define some useful keybindings
 ;; (define-keys *top-map*
-;; 	((kbd "XF86Calculator") "exec emacs -Q -f calc")
-;; 	((kbd "XF86HomePage") (concat "exec " *browser* " http://dss-project.org"))
-;; 	((kbd "XF86Search") (concat "exec " *browser* " http://google.com"))
-;; 	((kbd "XF86Mail") "exec thunderbird")
+;;      ((kbd "XF86Calculator") "exec emacs -Q -f calc")
+;;      ((kbd "XF86HomePage") (concat "exec " *browser* " http://dss-project.org"))
+;;      ((kbd "XF86Search") (concat "exec " *browser* " http://google.com"))
+;;      ((kbd "XF86Mail") "exec thunderbird")
 
-;; 		;; Good group navigation
-;; 		;; ((kbd "XF86Forward") "gnext") ;; Goto next group
-;; 		;; ((kbd "XF86Back") "gprev")    ;; Goto preview group
+;;              ;; Good group navigation
+;;              ;; ((kbd "XF86Forward") "gnext") ;; Goto next group
+;;              ;; ((kbd "XF86Back") "gprev")    ;; Goto preview group
 
-;; 		;; Control music playing. Need installed mpd and mpc
-;; 		;; ((kbd "XF86AudioPlay")  "exec mpc toggle")
-;; 		;; ((kbd "XF86Launch5")  "exec mpc next")
-;; 		;; ((kbd "XF86Launch1")  "exec mpc prev")
+;;              ;; Control music playing. Need installed mpd and mpc
+;;              ;; ((kbd "XF86AudioPlay")  "exec mpc toggle")
+;;              ;; ((kbd "XF86Launch5")  "exec mpc next")
+;;              ;; ((kbd "XF86Launch1")  "exec mpc prev")
 ;; )
 
 ;; ;;;; define and bind volume control commands
@@ -160,7 +203,7 @@
 (define-key dswm:*top-map* (kbd "XF86AudioLowerVolume") "vol-")
 (define-key dswm:*top-map* (kbd "XF86AudioRaiseVolume") "vol+")
 (define-key dswm:*top-map* (kbd "XF86AudioMute") "voltoggle")
- 
+
 ;; ;;;; wake up, Neo. Matrix has you
 ;; (defvar *matrix-bg-color* "black")
 ;; (defvar *matrix-fg-color* "green")
@@ -174,19 +217,18 @@
  (startup-only
   ;; let`s run some shell commands
   (run-shell-commands
- 	;; set up X cursor.
- 	"xsetroot -cursor_name left_ptr"
-        "urxvt"
-;; 	;; simple set up multiple keymaps for different languages
-;; 	"setxkbmap -layout 'us,ua,ru' -option 'grp:alt_shift_toggle,grp_led:caps,ctrl:nocaps"
-;; 	;; disable replace Caps Lock to Control key
-;; 	"setxkbmap -option 'ctrl:nocaps'"
-;; 	;; let`s start conkeror automatically
-;; 	"conkeror"
- 	)
-;; 	;; ...and load some DSWM modules...
+        ;; set up X cursor.
+        "xsetroot -cursor_name left_ptr"
+        "urxvt"))
+;;      ;; simple set up multiple keymaps for different languages
+;;      "setxkbmap -layout 'us,ua,ru' -option 'grp:alt_shift_toggle,grp_led:caps,ctrl:nocaps"
+;;      ;; disable replace Caps Lock to Control key
+;;      "setxkbmap -option 'ctrl:nocaps'"
+;;      ;; let`s start conkeror automatically
+;;      "conkeror"
+;;      ;; ...and load some DSWM modules...
 ;;  (load-module "s-bindings")
-  )
+
 
 ;; ;;;; Eye candy
 ;; ;;;; Set background color
@@ -213,3 +255,67 @@
 
 ;; ;;;; Set message border width
 ;; (set-msg-border-width 0)
+(defun raise-or-run-group-fun (number)
+  (let* ((screen (current-screen))
+         (numbered-group (find-group screen :number number)))
+    (if numbered-group
+        (switch-to-group numbered-group)
+        (add-group screen (princ-to-string number) :number number))))
+
+(defcommand raise-or-run-group (group-number)
+  ((:number "group number: "))
+  (raise-or-run-group-fun group-number))
+(dolist (number '(1 2 3 4 5 6 7 8 9))
+  (define-key *root-map* (kbd (format nil "F~d" number))
+    (format nil "raise-or-run-group ~d" number)))
+(define-key *groups-map* (kbd "f")
+ "raise-or-run-group")
+(defun dswm-y-or-n-p (prompt &optional (long-form nil))
+  (let ((ans-y (if long-form "yes" "y"))
+        (ans-n (if long-form "no" "n"))
+        (user-ans (gensym)))
+    (while t
+      (setq user-ans (read-one-line (current-screen) prompt))
+      (cond 
+        ((string= user-ans ans-y) (return-from dswm-y-or-n-p t))
+        ((string= user-ans ans-n) (return-from dswm-y-or-n-p nil))
+        ((null user-ans)  (return-from dswm-y-or-n-p nil))))))        
+(defcommand question-kill-window () ()
+  (if (dswm-y-or-n-p "kill-current-window?: ")
+      (kill-window)
+      nil))
+(defcommand question-kill-dswm () ()
+  (if (dswm-y-or-n-p "kill-dswm?: ")
+      (quit-dswm)
+      nil))
+(defcommand pdf-viewer (&optional file)
+  (let ((pdf (or
+              (which *pdf-viewer*)
+              (which "evince")
+              (which *editor*)));;bizare fallback
+        (pdf-coerce (coerce (princ-to-string pdf) 'list))
+        (pdf-class
+         (coerce (cons (char-upcase (car pdf-coerce))(cdr pdf-coerce)) 'string)))
+    (if (null pdf)
+        (error "no pdf viewer found, also no editor defined, Really?")
+        (if (not (null file))
+            (run-shell-command (princ-to-string pdf) file)
+            (raise-or-run (princ-to-string pdf) (list :class pdf-class))))))
+          
+;;kinda broken
+(defmacro run-or-pull-program (program funname)
+  (progn
+  `(defun ,funname (&optional arg)
+     (let* ((,program (which ,program))
+            (prog-list (gensym))
+            (prog-class (gensym))
+            (prog-list (coerce (princ-to-string ,program)) 'list)
+            (prog-class (coerce (cons (char-upcase (car prog-list))
+                                      (cdr prog-list)) 'string)))
+       (if (not (null arg))
+           (run-shell-command (princ-to-string ,program) arg)
+           (run-or-pull (princ-to-string ,program) 
+                        (list :class prog-class))))))
+  `(defcommand ,funname () ()
+     (,funname)))         
+(run-or-pull-program *browser* run-or-pull-browser)
