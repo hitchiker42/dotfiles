@@ -124,3 +124,139 @@ ZIP_NAME="$1"
 shfit
 find "$@" | zip "$ZIP_NAME" -@
 }
+rsync-backup(){
+sudo rsync -aAXv /* "$1" --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found}
+}
+mlton-keep(){
+MLTON_OPTS='-keep machine -keep ssa -keep dot -keep rssa -keep xml -keep ssa2  -keep sxml -keep g'
+MLTON_BASENAME=$(echo "$1" | awk '{print(substr($0,1,length-4))}')
+MLTON_PROG="$1"
+shift
+MLTON_OPTS="$MLTON_OPTS -show-def-use $MLTON_BASENAME.def_use -show-basis $MLTON_BASENAME.basis"
+if [ -f $MLTON_BASENAME ]; then
+    mv $MLTON_BASENAME $MLTON_BASENAME.old
+elif [ ! -d $MLTON_BASENAME ]; then
+    mkdir $MLTON_BASENAME
+fi
+(cd $MLTON_BASENAME && mlton $MLTON_OPTS -output $MLTON_BASENAME ../$MLTON_PROG $@)
+}
+do-ext(){
+if [ -z "$2" ]; then
+  echo "usage: do-ext ext command"	
+  return
+fi
+#need to test, make sure it works with the referances and all
+find -name "*.$1" -print0 | xargs -0 "$@"
+}
+mv-ext(){
+do-ext "$1" mv -t "$2"
+}
+safe-source(){
+if [ -f "$1" ];then
+    . "$1"
+fi
+}
+zip-dir(){
+ZIP_NAME="$1"
+shfit
+find "$@" | zip "$ZIP_NAME" -@
+}
+vbox-mod-compile(){
+  sudo dkms install vboxhost/$(pacman -Q virtualbox|awk {'print $2'}|sed 's/\-.\+//') -k $(uname -rm|sed 's/\ /\//')
+  sudo modprobe vboxdrv
+}
+set-alarm(){
+    alarm_time="$1"
+    TEMP=$(getopt -o s:: --long snooze:: -n alarm -- "$@")
+    eval set -- "$TEMP"
+    while true; do
+        case "$1" in
+            -s|--snooze)
+                snooze=t
+                case "$2" in
+                    "") snooze_time=5; shift 2;;
+                    *) snooze_time="$2"; shift 2;;
+                esac ;;
+	    --) shift ; break ;;
+	    *) echo "Internal error!" ; exit 1 ;;
+        esac
+    done
+    at "$1" -f /home/tucker/.alarm
+    if [[ $snooze ]]; then
+    at $(date -d "$1 $snooze_time minutes" +%H:%M) -f /home/tucker/.alarm
+    fi
+}
+hello-world-c(){
+    (cat <<"EOF"
+#include <stdio.h>
+int main(){
+  printf("Hello, World!\n");
+  return;
+}
+EOF
+) >"$1"
+}
+rar-to-zip (){
+for i in $(ls $1);do
+    dir_name=${i%.rar}
+    mkdir $dir_name
+    mv $i $dir_name
+    (cd $dir_name
+        unrar e $i
+        mv $i ..)
+    zip -r $dir_name $dir_name
+done
+}
+at_clear (){
+atq | awk '{print $1}' | xargs atrm
+}
+user-daemons(){
+    $bin/emacs --daemon
+    transmission-daemon
+    mpd
+}
+uni(){
+    printf "\u$1"
+}
+set-wine32(){
+    export WINEARCH=win32
+    export WINEPREFIX=~/.wine32
+}
+set-wine64(){
+    export WINEARCH=win64
+    export WINEPREFIX=~/.wine64
+}
+make-loop(){
+    sudo mknod -m660 "/dev/loop$1" b 7 $1
+}
+flac_to_mp3(){
+    local flac_input="$1"
+    local mp3_output=$(echo "$1" | sed 's/.flac$/.mp3/')
+    flac -d -c "$flac_input" | lame -h -b 320 - "$mp3_output"
+}
+loop_until_fail(){
+    true;
+    while [ $? -eq 0 ];do
+        $@
+    done
+}
+test_compile_c(){
+    local default_headers="#include <stdio.h>\n
+#include <stdlib.h>\n
+#include <stdint.h>\n
+#include <string.h>\n
+#include <unistd.h>\n
+"
+    local tmp_c=$(mktemp)
+    echo -e $default_headers >$tmp_c
+    echo -e "$1" >> $tmp_c
+    if [ "$2" ];then
+        if [ ${2:(-2)} = ".s" ] || [ ${2:(-4)} = ".asm" ]; then
+            gcc -x c -o "$2" $tmp_c -std=gnu99 -S -Og
+        else 
+            gcc -x c -o "$2" $tmp_c -std=gnu99 -c -Og
+        fi
+    else
+        gcc -x c -o /dev/null $tmp_c -std=gnu99 -c -Og
+    fi
+}
